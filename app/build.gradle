@@ -49,6 +49,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
     implementation "io.ktor:ktor-client-gson:$ktor_version"
 //    implementation "io.ktor:ktor-client-serialization:$ktor_version"
+    implementation ("com.github.bumptech.glide:glide:4.11.0") {
+        exclude group: "com.android.support"
+    }
     api "io.ktor:ktor-client-logging:$ktor_version"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
