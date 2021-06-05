@@ -18,5 +18,6 @@ data class Child(
 )
 
 data class ChildData(
-    val url: String
+    val url: String,
+    val name: String
 )

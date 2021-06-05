@@ -42,6 +42,7 @@ class LinksFactory {
         response.data.children.forEach {
             imgLinks.add(it.data.url)
         }
+        shuffleItems()
 
     }
     fun getTotalCount(): Int {
@@ -50,5 +51,13 @@ class LinksFactory {
 
     fun getUrlAt(position: Int): String {
         return imgLinks[position]
+    }
+
+    fun removeItem(position: Int){
+        imgLinks.removeAt(position)
+    }
+
+    fun shuffleItems() {
+        imgLinks.shuffle()
     }
 }

@@ -1,21 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                                                   android:layout_height="300dp" android:paddingBottom="25dp">
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="350dp" android:paddingBottom="8dp">
 
     <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_gravity="center"
-            android:paddingBottom="20dp" app:cardCornerRadius="4dp" app:cardBackgroundColor="#EAEAEA">
+            app:cardCornerRadius="10dp" app:cardBackgroundColor="#EAEAEA"
+            android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:paddingLeft="5dp"
+            android:paddingRight="5dp" android:paddingBottom="5dp" android:paddingTop="5dp"
+            android:foregroundGravity="center" android:id="@+id/cardView"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
+        <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar" android:layout_gravity="center" tools:visibility="invisible"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" app:srcCompat="@android:drawable/ic_menu_recent_history"
-                android:id="@+id/feedItem_imageView"
-                android:paddingBottom="25dp"/>
+                android:layout_height="match_parent">
+
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" app:srcCompat="@drawable/ic_launcher_foreground"
+                    android:id="@+id/feedItem_imageView"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/likeBtn"/>
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/lovebtn_selector"
+                    android:id="@+id/likeBtn"
+                    android:background="@null"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" android:requiresFadingEdge="horizontal|vertical"
+                    android:fadingEdge="horizontal|vertical"/>
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/ic_send"
+                    android:id="@+id/shareBtn"
+                    android:background="@null"
+                    app:layout_constraintBottom_toBottomOf="parent" android:requiresFadingEdge="horizontal|vertical"
+                    android:fadingEdge="horizontal|vertical"
+                    app:layout_constraintStart_toEndOf="@+id/likeBtn"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
