@@ -11,12 +11,12 @@ import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.uaudith.memesterland.factory.LinksFactory
 import com.uaudith.memesterland.feedItemOptions.Share
+import com.uaudith.memesterland.helpers.popupImage
 
 class RvImageAdapter(private val dataSet: LinksFactory) :
     RecyclerView.Adapter<RvImageAdapter.FeedViewHolder>() {
@@ -36,18 +36,22 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         holder.progBar.visibility = View.VISIBLE
+        Glide.with(holder.view)
+            .load(dataSet.getUrlAt(position))
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .override(holder.imgView.width,1)
+            .listener(glideListener(holder,position))
+            .into(holder.imgView)
         holder.likeBtn.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(holder.view.context, R.anim.enlarge))
         }
         holder.shareBtn.setOnClickListener{
             Share(dataSet.getUrlAt(position), holder.view.context)
         }
-        Glide.with(holder.view)
-            .load(dataSet.getUrlAt(position))
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .listener(glideListener(holder,position))
-            .into(holder.imgView)
+        holder.imgView.setOnClickListener {
+            popupImage(holder.view.context,dataSet.getUrlAt(position))
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -75,6 +79,8 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
                 isFirstResource: Boolean
             ): Boolean {
                 holder.progBar.visibility = View.GONE
+//                holder.imgView.layoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+//                holder.imgView.requestLayout()
                 return false
             }
 

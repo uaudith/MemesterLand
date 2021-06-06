@@ -15,8 +15,8 @@ class httpClient {
             }
             engine {
                 // this: AndroidEngineConfig
-                connectTimeout = 100_000
-                socketTimeout = 100_000
+                connectTimeout = 500_000
+                socketTimeout = 500_000
 //                proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("10.0.2.2", 8080))
             }
         }
