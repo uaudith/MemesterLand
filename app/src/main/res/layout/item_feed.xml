@@ -3,11 +3,11 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="350dp" android:paddingBottom="8dp">
+                                                   android:layout_height="wrap_content" android:paddingBottom="8dp">
 
     <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="0dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
             android:layout_gravity="center"
             app:cardCornerRadius="10dp" app:cardBackgroundColor="#EAEAEA"
@@ -23,14 +23,16 @@
                 android:id="@+id/progressBar" android:layout_gravity="center" tools:visibility="invisible"/>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="0dp" app:srcCompat="@drawable/ic_launcher_foreground"
+                    android:layout_height="400dp"
                     android:id="@+id/feedItem_imageView"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/likeBtn"/>
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/likeBtn"
+                    app:srcCompat="@drawable/ic_launcher_background"
+            />
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/lovebtn_selector"

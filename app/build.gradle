@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        meme {
+        storeFile file('E:\\androidKeys\\meme.jks')
+            storePassword '12345678'
+            keyPassword '12345678'
+            keyAlias 'key0'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -15,11 +23,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.meme
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

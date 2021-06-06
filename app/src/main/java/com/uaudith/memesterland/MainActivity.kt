@@ -10,8 +10,8 @@ import com.uaudith.memesterland.factory.LinksFactory
 const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
-    lateinit var rvFeed: RecyclerView
-    lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var rvFeed: RecyclerView
+    private lateinit var swipeRefresh: SwipeRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

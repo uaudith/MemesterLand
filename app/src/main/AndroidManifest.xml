@@ -10,6 +10,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.MemesterLand">
+
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="com.uaudith.memesterland.fileprovider"
