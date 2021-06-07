@@ -8,6 +8,8 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -25,6 +27,7 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
         val progBar: ProgressBar = view.findViewById(R.id.progressBar)
         val likeBtn: ImageButton = view.findViewById(R.id.likeBtn)
         val shareBtn: ImageButton = view.findViewById(R.id.shareBtn)
+        val cardView : CardView = view.findViewById(R.id.cardView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
@@ -38,8 +41,8 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
         holder.progBar.visibility = View.VISIBLE
         Glide.with(holder.view)
             .load(dataSet.getUrlAt(position))
-            .placeholder(R.drawable.ic_launcher_foreground)
-            .override(holder.imgView.width,1)
+            .placeholder(R.drawable.ic_refresh)
+//            .override(holder.cardView.width,1)
             .listener(glideListener(holder,position))
             .into(holder.imgView)
         holder.likeBtn.setOnClickListener {

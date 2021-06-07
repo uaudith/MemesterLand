@@ -27,12 +27,12 @@
 
             <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="400dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/feedItem_imageView"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/likeBtn"
                     app:srcCompat="@drawable/ic_launcher_background"
-            />
+                    android:scaleType="center"/>
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/lovebtn_selector"
