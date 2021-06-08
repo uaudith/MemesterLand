@@ -48,6 +48,9 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
         holder.likeBtn.setOnClickListener {
             it.startAnimation(AnimationUtils.loadAnimation(holder.view.context, R.anim.enlarge))
         }
+        holder.shareBtn.setOnClickListener {
+            it.startAnimation(AnimationUtils.loadAnimation(holder.view.context, R.anim.enlarge))
+        }
         holder.shareBtn.setOnClickListener{
             Share(dataSet.getUrlAt(position), holder.view.context)
         }

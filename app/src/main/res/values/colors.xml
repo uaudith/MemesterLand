@@ -7,4 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<!--    my colors-->
+    <color name="lightSky">#C7EAFF</color>
+    <color name="sky">#82B8D9</color>
+    <color name="drkSky">#42708C</color>
+    <color name="lightEarth">#F2C7AE</color>
+    <color name="darkEarth">#D9AB73</color>
+
+<!--    DarkMode-->
+    <color name="midnight">#171717</color>
+    <color name="night">#2E2E2E</color>
+    <color name="darkGray">#525252</color>
+    <color name="gray">#6B6B6B</color>
+    <color name="lightGray">#8C8C8C</color>
+
+
 </resources>
