@@ -2,12 +2,12 @@ package com.uaudith.memesterland
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.uaudith.memesterland.factory.LinksFactory
 
 
 const val TAG = "MainActivity"
@@ -23,19 +23,24 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_MemesterLand)
         setContentView(R.layout.activity_main)
 
+        val model: MainViewModel by viewModels()
+
         rvFeed = findViewById(R.id.rvFeed)
         swipeRefresh = findViewById(R.id.swiperefreshFeed)
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)
 
-        val lf = LinksFactory()
-        lf.addSourceLink("https://www.reddit.com/r/dankmemes/.json?limit=100")
+        val lf = model.lf
+
         val feedAdapter = RvImageAdapter(lf)
         rvFeed.adapter = feedAdapter
         rvFeed.layoutManager = LinearLayoutManager(this)
-        lf.addCallbackAfterSourceAdded { feedAdapter.notifyDataSetChanged() }
+        lf.setCbOnFetch { startPos, size ->
+            feedAdapter.notifyItemRangeInserted(startPos,size)
+        }
         Log.i(TAG,"RecyclerView initiated")
+
 
         swipeRefresh.setOnRefreshListener {
             lf.shuffleItems()
