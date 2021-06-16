@@ -1,50 +1,54 @@
 package com.uaudith.memesterland.factory
 
 import android.util.Log
-import com.uaudith.memesterland.entities.LinkList
-import io.ktor.client.request.*
-import com.uaudith.memesterland.httpClient
-import io.ktor.http.*
+import com.uaudith.memesterland.HttpClient
+import com.uaudith.memesterland.memeSources.MemeSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 const val TAG = "LinksFactory"
 class LinksFactory {
-    private val sources = mutableSetOf<String>()
+    private val sources = mutableSetOf<MemeSource>()
     private val imgLinks = mutableListOf<String>()
-    private val scope = CoroutineScope(Dispatchers.IO)
-    private var cbAfterSource: () -> Unit = {}
+    private lateinit var scope : CoroutineScope
+    private var cbAfterFetch: (Int, Int) -> Unit = { _: Int, _: Int -> }
+    private val imgLinksLock = Mutex()
 
-    fun addSourceLink(uri: String){
-        sources.add(uri)
-        scope.launch {
-            getImageUris(uri)
-            // link list download is finished
-            withContext(Dispatchers.Main){
-                Log.i(TAG,"Calling to reset After source added")
-                cbAfterSource()
+    fun addSource(source: MemeSource){
+        sources.add(source)
+        fetch(source)
+    }
+    fun addSource(vararg sources: MemeSource){
+        sources.forEach {
+            addSource(it)
+        }
+    }
+
+    private fun fetch(source: MemeSource)= scope.launch {
+
+        var startPos: Int
+        Log.i(TAG,"fetching addresses from internet")
+        source.fetch(HttpClient.client)
+        val size = source.getTotalCount()
+        imgLinksLock.withLock {
+                startPos = imgLinks.size
+//                Log.i(TAG,"start=$startPos and size=$size")
+                imgLinks.addAll(source.getAll())
+                withContext(Dispatchers.Main){
+                    cbAfterFetch(startPos, size)
+                }
             }
+
         }
+
+    fun setCbOnFetch(block: (Int, Int)->Unit){
+        cbAfterFetch = block
     }
 
-    fun addCallbackAfterSourceAdded(block: ()->Unit){
-        cbAfterSource = block
-    }
-
-    private suspend fun getImageUris(uri: String) {
-        val client = httpClient.client
-        val response = client.request<LinkList>(uri) {
-            // Configure request parameters exposed by HttpRequestBuilder
-            method = HttpMethod.Get
-        }
-        response.data.children.forEach {
-            imgLinks.add(it.data.url)
-        }
-        shuffleItems()
-
-    }
     fun getTotalCount(): Int {
         return imgLinks.size
     }
@@ -59,5 +63,8 @@ class LinksFactory {
 
     fun shuffleItems() {
         imgLinks.shuffle()
+    }
+    fun setScope(scope: CoroutineScope){
+        this.scope = scope
     }
 }

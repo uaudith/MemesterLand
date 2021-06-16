@@ -5,7 +5,7 @@ import androidx.annotation.Keep
 // Used to serialize the json response from reddit
 
 @Keep
-data class LinkList(
+data class RedditResponse(
     val kind: String,
     val data: Data
 )
