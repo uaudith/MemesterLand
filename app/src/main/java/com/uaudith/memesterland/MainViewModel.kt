@@ -6,11 +6,16 @@ import com.uaudith.memesterland.factory.LinksFactory
 import com.uaudith.memesterland.memeSources.Reddit
 
 class MainViewModel: ViewModel() {
-    val lf = LinksFactory()
+    val lfMain = LinksFactory()
+    val lfFav = LinksFactory()
     init {
-        lf.setScope(viewModelScope)
-        lf.addSource(
-            Reddit("dankmemes"),
+        lfMain.setScope(viewModelScope)
+        lfMain.addSource(
+            Reddit("dankmemes")
+        )
+
+        lfFav.setScope(viewModelScope)
+        lfFav.addSource(
             Reddit("greentext")
         )
     }

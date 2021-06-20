@@ -11,7 +11,8 @@
     <com.google.android.material.appbar.AppBarLayout android:layout_width="match_parent"
                                                      android:layout_height="wrap_content"
                                                      android:background="?attr/colorPrimary"
-                                                     android:layout_gravity="top" android:id="@+id/appbarLayout">
+                                                     android:layout_gravity="top" android:id="@+id/appbarLayout"
+                                                     >
         <androidx.appcompat.widget.Toolbar
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:id="@+id/toolbar"
@@ -20,21 +21,23 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swiperefreshFeed"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" tools:visibility="invisible">
+                android:background="?attr/colorPrimary"
+                app:tabSelectedTextColor="?colorSecondary"
+                app:tabTextColor="?colorSecondaryVariant"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/rvFeed"
-                tools:listitem="@layout/item_feed"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/viewPager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,14 +1,15 @@
 package com.uaudith.memesterland.helpers
 
+
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.WindowManager
+import android.view.*
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.uaudith.memesterland.R
+
 
 fun popupImage(context: Context, urlAt: String) {
     val myPopup = Dialog(context,R.style.ThemeOverlay_MaterialComponents_Dialog_Alert )
@@ -18,6 +19,8 @@ fun popupImage(context: Context, urlAt: String) {
     Glide.with(context)
         .load(urlAt)
         .into(popupImgView)
-    myPopup.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    myPopup.apply {
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
 
 }

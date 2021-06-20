@@ -1,21 +1,21 @@
 package com.uaudith.memesterland
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.uaudith.memesterland.entities.ViewPagerItemData
 
 
 const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var rvFeed: RecyclerView
-    private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var viewPager2: ViewPager2
     private lateinit var toolbar: Toolbar
+    private lateinit var tabLayout: TabLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,28 +25,28 @@ class MainActivity : AppCompatActivity() {
 
         val model: MainViewModel by viewModels()
 
-        rvFeed = findViewById(R.id.rvFeed)
-        swipeRefresh = findViewById(R.id.swiperefreshFeed)
-        toolbar = findViewById(R.id.toolbar)
 
+        toolbar = findViewById(R.id.toolbar)
+        viewPager2 = findViewById(R.id.viewPager)
+        tabLayout = findViewById(R.id.tabLayout)
         setSupportActionBar(toolbar)
 
-        val lf = model.lf
-
-        val feedAdapter = RvImageAdapter(lf)
-        rvFeed.adapter = feedAdapter
-        rvFeed.layoutManager = LinearLayoutManager(this)
-        lf.setCbOnFetch { startPos, size ->
+        val linksFactory = model.lfMain
+        val feedAdapter = RvImageAdapter(linksFactory)
+        linksFactory.setCbOnFetch { startPos, size ->
             feedAdapter.notifyItemRangeInserted(startPos,size)
         }
-        Log.i(TAG,"RecyclerView initiated")
 
+        val pageData = listOf(
+            ViewPagerItemData(feedAdapter,"dank"),
+            ViewPagerItemData(RvImageAdapter(model.lfFav),"green"))
 
-        swipeRefresh.setOnRefreshListener {
-            lf.shuffleItems()
-            feedAdapter.notifyDataSetChanged()
-            swipeRefresh.isRefreshing = false
-        }
+        viewPager2.adapter = ViewPagerAdapter(pageData)
+
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            tab.text = pageData[position].tabName
+        }.attach()
+
     }
 
 }
