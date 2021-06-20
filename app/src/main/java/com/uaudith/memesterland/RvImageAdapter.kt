@@ -8,8 +8,6 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -27,7 +25,7 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
         val progBar: ProgressBar = view.findViewById(R.id.progressBar)
         val likeBtn: ImageButton = view.findViewById(R.id.likeBtn)
         val shareBtn: ImageButton = view.findViewById(R.id.shareBtn)
-        val cardView : CardView = view.findViewById(R.id.cardView)
+//        val cardView : CardView = view.findViewById(R.id.cardView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
@@ -91,5 +89,8 @@ class RvImageAdapter(private val dataSet: LinksFactory) :
             }
 
         }
+    }
+    fun shuffleData(){
+        dataSet.shuffleItems()
     }
 }
