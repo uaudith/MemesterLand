@@ -3,6 +3,7 @@
           package="com.uaudith.memesterland">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -10,18 +11,20 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/splashScreenTheme">
-
+        <activity
+                android:name=".SettingsActivity"
+                android:label="@string/title_activity_settings">
+        </activity>
 
         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="com.uaudith.memesterland.fileprovider"
-                android:grantUriPermissions="true"
-                android:exported="false">
+                android:exported="false"
+                android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/filepaths" />
+                    android:resource="@xml/filepaths"/>
         </provider>
-
 
         <activity android:name=".MainActivity">
             <intent-filter>

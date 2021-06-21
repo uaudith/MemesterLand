@@ -1,0 +1,25 @@
+<PreferenceScreen
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+            app:title="@string/display"
+    >
+
+        <SwitchPreferenceCompat
+                app:key="darkMode"
+                app:title="@string/darkmode"
+                app:defaultValue="true"
+                app:icon="@drawable/ic_darkmode"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            app:title="@string/info">
+        <Preference
+                app:key="info"
+                app:title="Memesterland"
+                app:summary="com.uaudith.memesterland" app:icon="@drawable/ic_display"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
